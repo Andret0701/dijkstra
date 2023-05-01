@@ -6,12 +6,17 @@ public class Node {
     public String name;
     public ArrayList<Edge> edges = new ArrayList<>();
 
-    private Node(String name) {
+    public Node(String name) {
         this.name = name;
     }
 
-    public void addEdge(Node neighbour, double distance) {
+    public void addDirectedEdge(Node neighbour, double distance) {
         Edge edge = new Edge(neighbour, distance);
         edges.add(edge);
+    }
+
+    public void addEdge(Node neighbour, double distance) {
+        addDirectedEdge(neighbour, distance);
+        neighbour.addDirectedEdge(this, distance);
     }
 }
